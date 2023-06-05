@@ -1,0 +1,8 @@
+mat-form-field,
+textarea {
+  width: 100%;
+}
+
+button {
+  margin: 1rem;
+}
