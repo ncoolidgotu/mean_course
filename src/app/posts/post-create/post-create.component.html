@@ -1,13 +1,29 @@
 <!--<textarea rows="6" [value]="newPost" #postInput></textarea>--><!--If in double quote, will look for property name test. Need to wrap in single quote for value-->
 <!--# takes input to pass-->
 <mat-card>
-    <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
         <mat-form-field>
-            <input matInput type="text" name="title" placeholder="Post Title" ngModel required #title="ngModel">
+            <input 
+                matInput 
+                type="text" 
+                name="title" 
+                placeholder="Post Title" 
+                [ngModel]="post?.title"
+                required 
+                #title="ngModel">
             <mat-error *ngIf="title.invalid">Please enter post title</mat-error>
         </mat-form-field>
         <mat-form-field>
-            <textarea matInput rows="6" name="content" placeholder="Post Content" ngModel required #content="ngModel"></textarea> <!--Two way binding. Need forms module-->
+            <textarea 
+                matInput 
+                rows="6" 
+                name="content" 
+                placeholder="Post Content" 
+                [ngModel]="post?.content"
+                required 
+                #content="ngModel">
+            </textarea> <!--Two way binding. Need forms module-->
             <mat-error *ngIf="content.invalid">Please enter post content</mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit">Save Post</button> <!--When button is clicked, run this function from ts file-->
